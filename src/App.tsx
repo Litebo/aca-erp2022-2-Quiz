@@ -105,7 +105,7 @@ const restart = () => {
           3. Before changes in a new files can be added to the Git directory, what command will tell Git to track our file in the list of changes to be committed? - git add <br></br><br></br>
           4. Which command would we use to review the commit history for our project? - git log <br></br><br></br>    
           5. What's the command that you need to run to check what version of Git is currently installed in your computer? - git --version  <br></br><br></br>
-        
+          6. W
 
       </p>
       <button onClick={() => restart()}> Restart </button>
