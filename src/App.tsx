@@ -7,6 +7,7 @@ function App() {
 const [showFinalResults, setFinalResults] = useState(false);
 const [score, setScore] = useState(0);
 const [currentQuestion, setCurrentQuestion] = useState(0);
+const [currentAnswer, setAnswer] = useState(0);
 const questions = [
   {
     text: "What is the git command that downloads your repository from GitHub to your computer?",
@@ -18,12 +19,10 @@ const questions = [
     ],
   },
   {
-    text: "How do you create a copy of a lab under your own Github account so that you can solve the lab?",
+    text: "Git is the same as GitHub?",
     options: [
-      { id: 0, text: "A. Forking it via the GitHub interface.", isCorrect: false },
-      { id: 1, text: "B. git fork", isCorrect: true },
-      { id: 2, text: "C. git clone", isCorrect: false },
-      { id: 3, text: "D. git pull-request", isCorrect: false },
+      { id: 0, text: "A. True", isCorrect: false },
+      { id: 1, text: "B. False", isCorrect: true },
     ],
   },
   {
@@ -54,6 +53,18 @@ const questions = [
     ],
   },
 ];
+const answers = [{
+  text: "What is the git command that downloads your repository from GitHub to your computer"
+  ,
+  options: [
+    { id: 0, text: "git clone", isCorrect: false },
+    { id: 1, text: "EXPLANATION", isCorrect: false },
+    { id: 2, text: "DONE", isCorrect: true },
+  ],
+
+}
+]
+
 
 //Functions
 const optionClicked = (isCorrect: boolean) => {
@@ -65,7 +76,12 @@ setCurrentQuestion(currentQuestion + 1);
 }
 else{
   setFinalResults(true);
-} 
+  if(isCorrect){
+    setAnswer(currentAnswer + 1);
+  }else {
+    setFinalResults(true);
+  }
+}
 }
 
 const restart = () => {
@@ -73,26 +89,15 @@ const restart = () => {
   setCurrentQuestion(0);
   setFinalResults(false);
 }
+
   return (
-    <div className="App">
+    <div className="App">     
       <header className="App-header">
-        <img src={logo} style={{maxWidth:150, maxHeight:150}} className="App-logo" alt="logo" />
-        {/* <a
-          className="App-link"
-          href="https://africacode.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          I Love ACA
-        </a> */}
 
-        {/* 1. Header */}
-    <h1>Git Quiz</h1>
-    
-
+    {/*1.Header */}
+    <h2> Git Quiz </h2>       
     {/* 2. Current Score */}
-    <h2>Current Score: {score}</h2>
-
+      <h3> Current Score: {score} </h3>
     {showFinalResults ? (
 
       /* 4. Final Results */
@@ -100,14 +105,26 @@ const restart = () => {
       <h1>Final Results</h1>
       <h2>{score} out of {questions.length} correct - ({(score/questions.length)*100}%) </h2>
       <p>
-          1. What is the git command that downloads your repository from GitHub to your computer? - git clone <br></br><br></br>
-         2. How do you create a copy of a lab under your own Github account so that you can solve the lab? - git fork<br></br><br></br>
-          3. Before changes in a new files can be added to the Git directory, what command will tell Git to track our file in the list of changes to be committed? - git add <br></br><br></br>
-          4. Which command would we use to review the commit history for our project? - git log <br></br><br></br>    
-          5. What's the command that you need to run to check what version of Git is currently installed in your computer? - git --version  <br></br><br></br>
-          6. W
+         What is the git command that downloads your repository from GitHub to your computer? - git clone <br></br><br></br>
+         Git is the same as GitHub? - False<br></br><br></br>
+         Before changes in a new files can be added to the Git directory, what command will tell Git to track our file in the list of changes to be committed? - git add <br></br><br></br>
+         Which command would we use to review the commit history for our project? - git log <br></br><br></br>    
+         What's the command that you need to run to check what version of Git is currently installed in your computer? - git --version  <br></br><br></br>
+         
+</p>
+      {/* 
+      <h3>Question {currentQuestion + 1} out of {questions.length} </h3>
+      <h3 className="question-text">{answers[currentAnswer].text}</h3>
 
-      </p>
+<ul>
+{answers[currentAnswer].options.map((option) => {
+ return (
+     <li onClick={() =>optionClicked(option.isCorrect)} key={option.id}>{option.text}
+   </li>
+ );
+})}
+</ul> */}
+
       <button onClick={() => restart()}> Restart </button>
     </div> 
     ) : (
@@ -126,9 +143,8 @@ const restart = () => {
      })}
     </ul>
    </div>
-  )}
-      </header>
-    </div>
-  );
+  )}</header>
+      </div> //
+        );
 }
 export default App;
